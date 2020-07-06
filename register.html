@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .login-container {
+  float: right;
+}
+
+.topnav .inputNav {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  width:120px;
+}
+
+.topnav .login-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background-color: #555;
+  color: white;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .login-container button:hover {
+  background-color: green;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .login-container {
+    float: none;
+  }
+  .topnav a, .topnav .inputNav, .topnav .login-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav .inputNav {
+    border: 1px solid #ccc;  
+  }
+}
+</style>
+
+<div class="topnav">
+  <a href="#home">Home</a>
+  <div class="login-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Username" name="username" class="inputNav form-control is-invalid d-inline" id="inputEmail">
+      <input type="password" placeholder="Password" name="psw" class="inputNav form-control is-invalid d-inline" id="inputPass">
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+<h4 class="text-center mt-3"> Register </h4>
+<div class="row m-2">
+<div class="col-sm-6 col-md-4 col-lg-4 mt-2 mx-auto">
+
+<form action="/action_page.php">
+  <div class="form-group">
+    <label for="uemail">Email:</label>
+    <input type="text" class="form-control is-invalid" id="uemail" placeholder="Enter email" name="uemail" required>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control is-invalid" id="pwd" placeholder="Enter password" name="pswd" required>
+    <div class="invalid-feedback"> Must contain 6 to 20 characters with lowercase and at least one number.</div>
+  </div>
+ <div class="form-group">
+    <label for="pwd2">Repeat password:</label>
+    <input type="password" class="form-control is-invalid" id="pwd2" placeholder="Repeat password" name="pswd2" required>
+    <div class="invalid-feedback">Please fill out this field.</div>
+  </div>
+  <div class="form-group form-check text-center">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" name="remember" required> I agree on TERMS.
+      <div class="invalid-feedback">Check this checkbox to continue.</div>
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary mx-auto d-block">Submit</button>
+</form>
+  
+</div>
+</div>
+
+</body>
+</html>
+
+<script>
+
+document.getElementById("inputEmail").addEventListener('keyup', ValidateEmail);
+document.getElementById("uemail").addEventListener('keyup', ValidateEmail);
+function ValidateEmail() {
+var input = $(this);
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.value)){
+    input.removeClass('is-invalid');
+  } else {
+    input.addClass('is-invalid');
+}
+};
+
+
+document.getElementById("inputPass").addEventListener('keyup', existFunction);
+function existFunction(){
+var input = $(this);
+console.log(this.value.length);
+  if(this.value.length < 1){
+	input.addClass('is-invalid');	
+} else {
+	input.removeClass('is-invalid');
+}
+};
+
+document.getElementById("pwd").addEventListener('keyup', existFunction);
+function existFunction(){
+var input = $(this);
+console.log(this.value.length);
+var passw = /^(?=.*\d)(?=.*[a-z]).{6,20}$/;
+if(this.value.match(passw)) { 
+input.removeClass('is-invalid');
+} else { 
+  input.addClass('is-invalid');
+}
+};
+
+document.getElementById("pwd2").addEventListener('keyup', isSamePassFunction);
+function isSamePassFunction(){
+var input = $(this);
+console.log(this.value.length);
+var password_original = document.getElementById("pwd").value;
+if (password_original == this.value){
+    input.removeClass('is-invalid');
+  } else {
+    input.addClass('is-invalid');
+}
+
+};
+
+</script>
